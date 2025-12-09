@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron bg-gradient-primary text-white py-5 rounded shadow">
+    <div class="container">
+        <h1 class="display-4">Welcome to Book Library</h1>
+        <p class="lead">A comprehensive book management system built with ASP.NET MVC</p>
+        <hr class="my-4" style="background-color: white;">
+        <p>Explore our collection, search for books, and manage your reading list.</p>
+        <a href="@Url.Action("Index", "Books")" class="btn btn-light btn-lg">
+            <i class="fas fa-book-open me-2"></i> Browse Books
+        </a>
+        <a href="@Url.Action("Create", "Books")" class="btn btn-outline-light btn-lg ms-2">
+            <i class="fas fa-plus me-2"></i> Add New Book
+        </a>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100 shadow-hover">
+                <div class="card-body">
+                    <i class="fas fa-search fa-3x text-primary mb-3"></i>
+                    <h3 class="card-title">Search & Discover</h3>
+                    <p class="card-text">Find books by title, author, category, or ISBN with our advanced search system.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100 shadow-hover">
+                <div class="card-body">
+                    <i class="fas fa-sort fa-3x text-success mb-3"></i>
+                    <h3 class="card-title">Sort & Filter</h3>
+                    <p class="card-text">Sort books by price, year, rating, or filter by categories and price ranges.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card text-center h-100 shadow-hover">
+                <div class="card-body">
+                    <i class="fas fa-chart-bar fa-3x text-warning mb-3"></i>
+                    <h3 class="card-title">Statistics & Reports</h3>
+                    <p class="card-text">View detailed statistics and export book data in multiple formats.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">Project Features</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Full MVC Architecture Implementation
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Custom Models and Database Integration
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Advanced Search Functionality
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Multi-Column Sorting
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Dynamic Filtering System
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Pagination with Navigation
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Custom CSS Styling
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    JavaScript Enhanced UI
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12 text-center">
+            <h3 class="mb-4">Technology Stack</h3>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <span class="badge bg-primary p-3">ASP.NET MVC 5</span>
+                <span class="badge bg-secondary p-3">Entity Framework</span>
+                <span class="badge bg-success p-3">Bootstrap 5</span>
+                <span class="badge bg-danger p-3">JavaScript</span>
+                <span class="badge bg-warning p-3">jQuery</span>
+                <span class="badge bg-info p-3">SQL Server</span>
+                <span class="badge bg-dark p-3">HTML5 & CSS3</span>
+            </div>
+        </div>
+    </div>
+</div>

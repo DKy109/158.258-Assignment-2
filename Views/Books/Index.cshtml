@@ -1,0 +1,283 @@
+﻿@model IEnumerable<WebAss2.Models.Book>
+
+@{
+    ViewBag.Title = "Book Library";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="display-4 mb-4">Book Library</h1>
+            <p class="lead">Browse our collection of books with advanced search, filtering, and sorting options.</p>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Search & Filter</h5>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Index", "Books", FormMethod.Get, new { @class = "form-inline", id = "searchForm" }))
+                    {
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="searchString" class="form-label">Search:</label>
+                                @Html.TextBox("searchString", ViewBag.SearchString as string, new { @class = "form-control", placeholder = "Title, Author, ISBN...", id = "searchInput" })
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="category" class="form-label">Category:</label>
+                                @Html.DropDownList("category", new SelectList(ViewBag.Categories), "All Categories", new { @class = "form-control", id = "categoryFilter" })
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="minPrice" class="form-label">Min Price:</label>
+                                @Html.TextBox("minPrice", ViewBag.MinPrice as string, new { @class = "form-control", placeholder = "$ Min", type = "number", min = "0", step = "0.01" })
+                            </div>
+
+                            <div class="col-md-2">
+                                <label for="maxPrice" class="form-label">Max Price:</label>
+                                @Html.TextBox("maxPrice", ViewBag.MaxPrice as string, new { @class = "form-control", placeholder = "$ Max", type = "number", min = "0", step = "0.01" })
+                            </div>
+
+                            <div class="col-md-1 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-search"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sorting and Results Header -->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <div class="btn-group" role="group">
+                @{
+                    string[] sortOptions = {
+                        "title", "author", "price", "year", "rating"
+                    };
+                    string[] sortDisplay = {
+                        "Title", "Author", "Price", "Year", "Rating"
+                    };
+                }
+
+                @for (int i = 0; i < sortOptions.Length; i++)
+                {
+                    <a href="@Url.Action("Index", new {
+                        searchString = ViewBag.SearchString,
+                        category = ViewBag.SelectedCategory,
+                        sortOrder = ViewBag.CurrentSort == sortOptions[i] + "_asc" ? sortOptions[i] + "_desc" : sortOptions[i] + "_asc",
+                        page = 1
+                    })"
+                       class="btn btn-outline-secondary @(ViewBag.CurrentSort?.Contains(sortOptions[i]) == true ? "active" : "")">
+                        @sortDisplay[i]
+                        @if (ViewBag.CurrentSort == sortOptions[i] + "_asc")
+                        {
+                            <i class="fas fa-sort-up"></i>
+                        }
+                        else if (ViewBag.CurrentSort == sortOptions[i] + "_desc")
+                        {
+                            <i class="fas fa-sort-down"></i>
+                        }
+                        else
+                        {
+                            <i class="fas fa-sort"></i>
+                        }
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div class="col-md-6 text-end">
+            <span class="badge bg-info">@ViewBag.TotalItems books found</span>
+            <a href="@Url.Action("ExportToCsv")" class="btn btn-success btn-sm">
+                <i class="fas fa-download"></i> Export CSV
+            </a>
+            <a href="@Url.Action("Create")" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Add New Book
+            </a>
+        </div>
+    </div>
+
+    <!-- Books Grid -->
+    <div class="row" id="booksGrid">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 book-card shadow-sm">
+                    <div class="card-header bg-light">
+                        <h5 class="card-title mb-0">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        <small class="text-muted">by @Html.DisplayFor(modelItem => item.Author)</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="card-text">
+                                    <strong>Category:</strong>
+                                    <span class="badge bg-secondary">@Html.DisplayFor(modelItem => item.Category)</span>
+                                </p>
+                                <p class="card-text">
+                                    <strong>Published:</strong> @Html.DisplayFor(modelItem => item.PublishedYear)
+                                </p>
+                                <p class="card-text">
+                                    <strong>Price:</strong>
+                                    <span class="text-success fw-bold">@Html.DisplayFor(modelItem => item.Price)</span>
+                                </p>
+                                @if (item.Rating.HasValue)
+                                {
+                                    <p class="card-text">
+                                        <strong>Rating:</strong>
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= Math.Floor(item.Rating.Value))
+                                            {
+                                                <i class="fas fa-star text-warning"></i>
+                                            }
+                                            else if (i == Math.Ceiling(item.Rating.Value) && !item.Rating.Value.ToString().EndsWith("0"))
+                                            {
+                                                <i class="fas fa-star-half-alt text-warning"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="far fa-star text-warning"></i>
+                                            }
+                                        }
+                                        <span class="ms-1">(@item.Rating.Value.ToString("0.0"))</span>
+                                    </p>
+                                }
+                            </div>
+                        </div>
+                        <p class="card-text text-truncate" title="@item.Description">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="btn-group w-100" role="group">
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-primary btn-sm" })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-secondary btn-sm" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger btn-sm" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Pagination -->
+    @if (ViewBag.TotalPages > 1)
+    {
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        @if (ViewBag.PageNumber > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { page = 1 })" aria-label="First">
+                                    <span aria-hidden="true">&laquo;&laquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.PageNumber - 1 })" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        }
+
+                        @{
+                            int startPage = Math.Max(1, ViewBag.PageNumber - 2);
+                            int endPage = Math.Min(ViewBag.TotalPages, ViewBag.PageNumber + 2);
+                        }
+
+                        @for (int i = startPage; i <= endPage; i++)
+                        {
+                            <li class="page-item @(i == ViewBag.PageNumber ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                            </li>
+                        }
+
+                        @if (ViewBag.PageNumber < ViewBag.TotalPages)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.PageNumber + 1 })" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.TotalPages })" aria-label="Last">
+                                    <span aria-hidden="true">&raquo;&raquo;</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+                <p class="text-center text-muted">
+                    Page @ViewBag.PageNumber of @ViewBag.TotalPages
+                    (Showing @ViewBag.PageSize of @ViewBag.TotalItems books)
+                </p>
+            </div>
+        </div>
+    }
+
+    <!-- Quick Stats -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Library Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <div class="stat-box p-3 bg-light rounded">
+                                <h3 class="text-primary">@ViewBag.TotalItems</h3>
+                                <p class="mb-0">Total Books</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box p-3 bg-light rounded">
+                                <h3 class="text-success">@ViewBag.Categories?.Count</h3>
+                                <p class="mb-0">Categories</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box p-3 bg-light rounded">
+                                <h3 class="text-warning">@Model.Average(b => b.Price).ToString("C")</h3>
+                                <p class="mb-0">Average Price</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-box p-3 bg-light rounded">
+                                <h3 class="text-danger">@Model.Where(b => b.Rating.HasValue).Average(b => b.Rating)?.ToString("0.0")</h3>
+                                <p class="mb-0">Average Rating</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Search Modal -->
+<div class="modal fade" id="quickSearchModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Quick Search Results</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="quickSearchResults"></div>
+            </div>
+        </div>
+    </div>
+</div>

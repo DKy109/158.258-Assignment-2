@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="display-4 mb-4">Contact Us</h1>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Contact Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <h6><i class="fas fa-university me-2"></i> Institution</h6>
+                                <p>Massey University<br>School of Mathematical & Computational Sciences</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6><i class="fas fa-map-marker-alt me-2"></i> Address</h6>
+                                <p>Private Bag 11 222<br>Palmerston North 4442<br>New Zealand</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6><i class="fas fa-envelope me-2"></i> Email</h6>
+                                <p>
+                                    <a href="mailto:contact@booklibrary.com" class="text-decoration-none">
+                                        contact@booklibrary.com
+                                    </a>
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6><i class="fas fa-phone me-2"></i> Phone</h6>
+                                <p>+64 6 356 9099</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Send Message</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="contactForm">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Your Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                    <div class="invalid-feedback">Please enter your name.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                    <div class="invalid-feedback">Please enter a subject.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                                    <div class="invalid-feedback">Please enter your message.</div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane me-2"></i> Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mt-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Project Submission Links</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-4 mb-3">
+                            <a href="https://validator.w3.org/check?uri=referer" target="_blank"
+                               class="btn btn-outline-primary w-100">
+                                <i class="fas fa-check-circle me-2"></i> HTML5 Validator
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="https://jigsaw.w3.org/css-validator/check/referer" target="_blank"
+                               class="btn btn-outline-success w-100">
+                                <i class="fas fa-check-circle me-2"></i> CSS Validator
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="mailto:contact@booklibrary.com" class="btn btn-outline-warning w-100">
+                                <i class="fas fa-envelope me-2"></i> Email Contact
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#contactForm').submit(function (e) {
+                e.preventDefault();
+
+                if (this.checkValidity() === false) {
+                    e.stopPropagation();
+                } else {
+                    // Simulate form submission
+                    alert('Thank you for your message! This is a demonstration form.');
+                    this.reset();
+                }
+
+                $(this).addClass('was-validated');
+            });
+        });
+    </script>
+}
