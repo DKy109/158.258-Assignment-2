@@ -20,7 +20,10 @@ namespace WebAss2.Models
 
         [Required(ErrorMessage = "Category is required")]
         [Display(Name = "Category")]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
+
+        // Navigation property
+        public virtual Category Category { get; set; }
 
         [Display(Name = "ISBN")]
         [RegularExpression(@"^(?:\d{3}-)?\d{10}$", ErrorMessage = "Invalid ISBN format")]

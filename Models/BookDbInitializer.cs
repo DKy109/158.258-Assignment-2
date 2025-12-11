@@ -24,7 +24,7 @@ namespace WebAss2.Models
                 new Book {
                     Title = "The Great Gatsby",
                     Author = "F. Scott Fitzgerald",
-                    Category = "Fiction",
+                    CategoryId = categories.Find(c => c.Name == "Fiction").Id,
                     ISBN = "978-0743273565",
                     PublishedYear = 1925,
                     Price = 12.99m,
@@ -37,7 +37,7 @@ namespace WebAss2.Models
                 new Book {
                     Title = "Clean Code",
                     Author = "Robert C. Martin",
-                    Category = "Technology",
+                    CategoryId = categories.Find(c => c.Name == "Technology").Id,
                     ISBN = "978-0132350884",
                     PublishedYear = 2008,
                     Price = 45.99m,
@@ -50,7 +50,7 @@ namespace WebAss2.Models
                 new Book {
                     Title = "A Brief History of Time",
                     Author = "Stephen Hawking",
-                    Category = "Science",
+                    CategoryId = categories.Find(c => c.Name == "Science").Id,
                     ISBN = "978-0553380163",
                     PublishedYear = 1988,
                     Price = 18.99m,
@@ -63,7 +63,7 @@ namespace WebAss2.Models
                 new Book {
                     Title = "Steve Jobs",
                     Author = "Walter Isaacson",
-                    Category = "Biography",
+                    CategoryId = categories.Find(c => c.Name == "Biography").Id,
                     ISBN = "978-1451648539",
                     PublishedYear = 2011,
                     Price = 25.99m,
@@ -76,7 +76,7 @@ namespace WebAss2.Models
                 new Book {
                     Title = "Sapiens: A Brief History of Humankind",
                     Author = "Yuval Noah Harari",
-                    Category = "History",
+                    CategoryId = categories.Find(c => c.Name == "History").Id,
                     ISBN = "978-0062316097",
                     PublishedYear = 2015,
                     Price = 22.99m,
@@ -89,7 +89,7 @@ namespace WebAss2.Models
                 new Book {
                     Title = "To Kill a Mockingbird",
                     Author = "Harper Lee",
-                    Category = "Fiction",
+                    CategoryId = categories.Find(c => c.Name == "Fiction").Id,
                     ISBN = "978-0446310789",
                     PublishedYear = 1960,
                     Price = 14.99m,
@@ -102,7 +102,7 @@ namespace WebAss2.Models
                 new Book {
                     Title = "The Pragmatic Programmer",
                     Author = "David Thomas & Andrew Hunt",
-                    Category = "Technology",
+                    CategoryId = categories.Find(c => c.Name == "Technology").Id,
                     ISBN = "978-0201616224",
                     PublishedYear = 1999,
                     Price = 39.99m,
