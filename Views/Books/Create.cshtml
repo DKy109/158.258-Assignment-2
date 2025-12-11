@@ -1,136 +1,124 @@
 @model WebAss2.Models.Book
 
-@{
-    ViewBag.Title = "Create";
-}
+@{    ViewBag.Title = "Create New Book";}
 
-<h2>Create</h2>
-
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
+<div class="container">
+    <h2 class="mb-4">Create New Book</h2>
     
-    <div class="form-horizontal">
-        <h4>Book</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div class="card shadow">
+        <div class="card-body">
+            @using (Html.BeginForm()) 
+            {
+                @Html.AntiForgeryToken()
+                
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+                
+                <div class="row">
+                    <!-- Left Column -->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter book title" } })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted">Example: The Great Gatsby</small>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter author name" } })
+                            @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted">Example: F. Scott Fitzgerald</small>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CategoryId, (SelectList)ViewBag.CategoryId, "Select a category", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "form-label" })
+                            @Html.DropDownListFor(model => model.CategoryId, (SelectList)ViewBag.CategoryId, "Select a category", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ISBN, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ISBN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ISBN, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.ISBN, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.ISBN, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter ISBN" } })
+                            @Html.ValidationMessageFor(model => model.ISBN, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted">Example: 978-3-16-148410-0</small>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PublishedYear, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PublishedYear, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PublishedYear, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.PublishedYear, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.PublishedYear, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter publication year" } })
+                            @Html.ValidationMessageFor(model => model.PublishedYear, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted">Example: 1925</small>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter price" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted">Example: 12.99</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-label" })
+                            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows = 4, placeholder = "Enter book description" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted">Example: A classic novel about the American Dream...</small>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                @Html.EditorFor(model => model.InStock, new { htmlAttributes = new { @class = "form-check-input" } })
+                                @Html.LabelFor(model => model.InStock, htmlAttributes: new { @class = "form-check-label" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.InStock, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.InStock)
-                    @Html.ValidationMessageFor(model => model.InStock, "", new { @class = "text-danger" })
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter rating (1-5)" } })
+                            @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted">Example: 4.5</small>
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.PageCount, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.PageCount, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter page count" } })
+                            @Html.ValidationMessageFor(model => model.PageCount, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted">Example: 180</small>
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Publisher, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.Publisher, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter publisher name" } })
+                            @Html.ValidationMessageFor(model => model.Publisher, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted">Example: Scribner</small>
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Language, htmlAttributes: new { @class = "form-label" })
+                            @Html.EditorFor(model => model.Language, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter language" } })
+                            @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted">Example: English</small>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Rating, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CoverImage, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CoverImage, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CoverImage, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PageCount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PageCount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PageCount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Publisher, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Publisher, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Publisher, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Language, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Language, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                
+                <!-- Example Book Image -->
+                <div class="mt-4 text-center">
+                    <h5>Example Book Cover</h5>
+                    <img src="https://picsum.photos/id/24/200/300" class="img-fluid rounded shadow-sm mt-2" alt="Example book cover">
+                    <p class="text-muted mt-2">Your book will be displayed with a cover image like this</p>
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="mt-4 text-end">
+                    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-outline-secondary" })
+                    <input type="submit" value="Create Book" class="btn btn-primary ms-2" />
+                </div>
+            }
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

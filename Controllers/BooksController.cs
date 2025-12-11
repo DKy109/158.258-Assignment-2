@@ -8,7 +8,7 @@ namespace WebAss2.Controllers
     public class BooksController : Controller
     {
         private BookDbContext db = new BookDbContext();
-        private readonly int PageSize = 5; // Items per page
+        private readonly int PageSize = 6; // Items per page
 
         // GET: Books
         public ActionResult Index(string searchString, int? category, string sortOrder, int? page)

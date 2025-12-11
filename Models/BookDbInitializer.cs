@@ -111,6 +111,45 @@ namespace WebAss2.Models
                     PageCount = 352,
                     Publisher = "Addison-Wesley",
                     Language = "English"
+                },
+                new Book {
+                    Title = "1984",
+                    Author = "George Orwell",
+                    CategoryId = categories.Find(c => c.Name == "Fiction").Id,
+                    ISBN = "978-0451524935",
+                    PublishedYear = 1949,
+                    Price = 16.99m,
+                    Description = "A dystopian social science fiction novel.",
+                    Rating = 4.9m,
+                    PageCount = 328,
+                    Publisher = "Secker & Warburg",
+                    Language = "English"
+                },
+                new Book {
+                    Title = "The Selfish Gene",
+                    Author = "Richard Dawkins",
+                    CategoryId = categories.Find(c => c.Name == "Science").Id,
+                    ISBN = "978-0198788607",
+                    PublishedYear = 1976,
+                    Price = 21.99m,
+                    Description = "A revolutionary work in evolutionary biology.",
+                    Rating = 4.5m,
+                    PageCount = 368,
+                    Publisher = "Oxford University Press",
+                    Language = "English"
+                },
+                new Book {
+                    Title = "Leonardo da Vinci",
+                    Author = "Walter Isaacson",
+                    CategoryId = categories.Find(c => c.Name == "Biography").Id,
+                    ISBN = "978-1501139154",
+                    PublishedYear = 2017,
+                    Price = 32.99m,
+                    Description = "A biography of the Italian polymath.",
+                    Rating = 4.7m,
+                    PageCount = 624,
+                    Publisher = "Simon & Schuster",
+                    Language = "English"
                 }
             };
 

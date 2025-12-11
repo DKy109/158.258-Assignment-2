@@ -21,24 +21,22 @@
                     <h5 class="mb-0">Search & Filter</h5>
                 </div>
                 <div class="card-body">
-                    @using (Html.BeginForm("Index", "Books", FormMethod.Get, new { @class = "form-inline" }))
+                    @using (Html.BeginForm("Index", "Books", FormMethod.Get, new { @class = "d-flex flex-wrap gap-3 align-items-end" }))
                     {
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="searchString" class="form-label">Search:</label>
-                                @Html.TextBox("searchString", ViewBag.SearchString as string, new { @class = "form-control", placeholder = "Title, Author..." })
-                            </div>
+                        <div class="flex-grow-1" style="min-width: 300px;">
+                            <label for="searchString" class="form-label">Search:</label>
+                            @Html.TextBox("searchString", ViewBag.SearchString as string, new { @class = "form-control w-100", placeholder = "Title, Author..." })
+                        </div>
 
-                            <div class="col-md-4">
-                                <label for="category" class="form-label">Category:</label>
-                                @Html.DropDownList("category", new SelectList(ViewBag.Categories), "All Categories", new { @class = "form-control" })
-                            </div>
+                        <div style="min-width: 200px;">
+                            <label for="category" class="form-label">Category:</label>
+                            @Html.DropDownList("category", new SelectList(ViewBag.Categories), "All Categories", new { @class = "form-control w-100" })
+                        </div>
 
-                            <div class="col-md-2 d-flex align-items-end">
-                                <button type="submit" class="btn btn-primary w-100">
-                                    <i class="fas fa-search"></i> Search
-                                </button>
-                            </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-search me-2"></i> Search
+                            </button>
                         </div>
                     }
                 </div>
@@ -47,34 +45,74 @@
     </div>
 
     <!-- Sorting Options -->
-    <div class="row mb-3">
+    <div class="row mb-4">
         <div class="col-md-12">
-            <div class="btn-group" role="group">
-                <p class="mr-3 mt-1">Sort by:</p>
-                <a href="@Url.Action("Index", new {
-                    searchString = ViewBag.SearchString,
-                    category = ViewBag.SelectedCategory,
-                    sortOrder = ViewBag.CurrentSort == "" ? "title_desc" : ""
-                })
-                   class="btn btn-outline-secondary @(string.IsNullOrEmpty(ViewBag.CurrentSort) ? "active" : "")">
-                    Title @(string.IsNullOrEmpty(ViewBag.CurrentSort) ? "↓" : "↑")
-                </a>
-                <a href="@Url.Action("Index", new {
-                    searchString = ViewBag.SearchString,
-                    category = ViewBag.SelectedCategory,
-                    sortOrder = ViewBag.CurrentSort == "author_asc" ? "author_desc" : "author_asc"
-                })
-                   class="btn btn-outline-secondary @(ViewBag.CurrentSort?.Contains("author") == true ? "active" : "")">
-                    Author @(ViewBag.CurrentSort == "author_asc" ? "↑" : "↓")
-                </a>
-                <a href="@Url.Action("Index", new {
-                    searchString = ViewBag.SearchString,
-                    category = ViewBag.SelectedCategory,
-                    sortOrder = ViewBag.CurrentSort == "price_asc" ? "price_desc" : "price_asc"
-                })
-                   class="btn btn-outline-secondary @(ViewBag.CurrentSort?.Contains("price") == true ? "active" : "")">
-                    Price @(ViewBag.CurrentSort == "price_asc" ? "↑" : "↓")
-                </a>
+            <div class="card shadow-sm bg-light">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-start gap-2">
+                        <h6 class="mb-0">Sort by:</h6>
+                        
+                        <!-- Title Sort -->
+                        <div class="btn-group">
+                            <a href="@Url.Action("Index", new {
+                                searchString = ViewBag.SearchString,
+                                category = ViewBag.SelectedCategory,
+                                sortOrder = ""
+                            })
+                               class="btn @(string.IsNullOrEmpty(ViewBag.CurrentSort) ? "btn-primary" : "btn-outline-primary")">
+                                Title
+                            </a>
+                            <a href="@Url.Action("Index", new {
+                                searchString = ViewBag.SearchString,
+                                category = ViewBag.SelectedCategory,
+                                sortOrder = "title_desc"
+                            })
+                               class="btn @(ViewBag.CurrentSort == "title_desc" ? "btn-primary" : "btn-outline-primary")">
+                                <i class="fas fa-sort-down"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- Author Sort -->
+                        <div class="btn-group">
+                            <a href="@Url.Action("Index", new {
+                                searchString = ViewBag.SearchString,
+                                category = ViewBag.SelectedCategory,
+                                sortOrder = "author_asc"
+                            })
+                               class="btn @(ViewBag.CurrentSort == "author_asc" ? "btn-primary" : "btn-outline-primary")">
+                                Author
+                            </a>
+                            <a href="@Url.Action("Index", new {
+                                searchString = ViewBag.SearchString,
+                                category = ViewBag.SelectedCategory,
+                                sortOrder = "author_desc"
+                            })
+                               class="btn @(ViewBag.CurrentSort == "author_desc" ? "btn-primary" : "btn-outline-primary")">
+                                <i class="fas fa-sort-down"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- Price Sort -->
+                        <div class="btn-group">
+                            <a href="@Url.Action("Index", new {
+                                searchString = ViewBag.SearchString,
+                                category = ViewBag.SelectedCategory,
+                                sortOrder = "price_asc"
+                            })
+                               class="btn @(ViewBag.CurrentSort == "price_asc" ? "btn-primary" : "btn-outline-primary")">
+                                Price
+                            </a>
+                            <a href="@Url.Action("Index", new {
+                                searchString = ViewBag.SearchString,
+                                category = ViewBag.SelectedCategory,
+                                sortOrder = "price_desc"
+                            })
+                               class="btn @(ViewBag.CurrentSort == "price_desc" ? "btn-primary" : "btn-outline-primary")">
+                                <i class="fas fa-sort-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -85,6 +123,9 @@
         {
             <div class="col-md-4 mb-4">
                 <div class="card h-100 book-card shadow-sm">
+                    <!-- Book Cover Image -->
+                    <img src="https://picsum.photos/id/@(item.Id + 10)/300/400" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Title) cover">
+                    
                     <div class="card-header bg-light">
                         <h5 class="card-title mb-0">@Html.DisplayFor(modelItem => item.Title)</h5>
                         <small class="text-muted">by @Html.DisplayFor(modelItem => item.Author)</small>

@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -51,53 +51,48 @@
         </div>
     </div>
 
+    <!-- Featured Books Section -->
     <div class="row mt-5">
         <div class="col-md-12">
-            <div class="card shadow">
-                <div class="card-header bg-info text-white">
-                    <h4 class="mb-0">Project Features</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <i class="fas fa-check text-success me-2"></i>
-                                    Full MVC Architecture Implementation
-                                </li>
-                                <li class="list-group-item">
-                                    <i class="fas fa-check text-success me-2"></i>
-                                    Custom Models and Database Integration
-                                </li>
-                                <li class="list-group-item">
-                                    <i class="fas fa-check text-success me-2"></i>
-                                    Advanced Search Functionality
-                                </li>
-                                <li class="list-group-item">
-                                    <i class="fas fa-check text-success me-2"></i>
-                                    Multi-Column Sorting
-                                </li>
-                            </ul>
+            <h3 class="mb-4 text-center">Featured Books</h3>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 text-center">
+                        <img src="https://picsum.photos/id/24/300/400" class="card-img-top" alt="Book cover">
+                        <div class="card-body">
+                            <h5 class="card-title">The Great Gatsby</h5>
+                            <p class="card-text">F. Scott Fitzgerald</p>
+                            <a href="@Url.Action("Index", "Books")" class="btn btn-primary">View Details</a>
                         </div>
-                        <div class="col-md-6">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <i class="fas fa-check text-success me-2"></i>
-                                    Dynamic Filtering System
-                                </li>
-                                <li class="list-group-item">
-                                    <i class="fas fa-check text-success me-2"></i>
-                                    Pagination with Navigation
-                                </li>
-                                <li class="list-group-item">
-                                    <i class="fas fa-check text-success me-2"></i>
-                                    Custom CSS Styling
-                                </li>
-                                <li class="list-group-item">
-                                    <i class="fas fa-check text-success me-2"></i>
-                                    JavaScript Enhanced UI
-                                </li>
-                            </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 text-center">
+                        <img src="https://picsum.photos/id/25/300/400" class="card-img-top" alt="Book cover">
+                        <div class="card-body">
+                            <h5 class="card-title">To Kill a Mockingbird</h5>
+                            <p class="card-text">Harper Lee</p>
+                            <a href="@Url.Action("Index", "Books")" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 text-center">
+                        <img src="https://picsum.photos/id/26/300/400" class="card-img-top" alt="Book cover">
+                        <div class="card-body">
+                            <h5 class="card-title">1984</h5>
+                            <p class="card-text">George Orwell</p>
+                            <a href="@Url.Action("Index", "Books")" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100 text-center">
+                        <img src="https://picsum.photos/id/27/300/400" class="card-img-top" alt="Book cover">
+                        <div class="card-body">
+                            <h5 class="card-title">Pride and Prejudice</h5>
+                            <p class="card-text">Jane Austen</p>
+                            <a href="@Url.Action("Index", "Books")" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -105,17 +100,30 @@
         </div>
     </div>
 
-    <div class="row mt-5">
+    <!-- How It Works Section -->
+    <div class="row mt-5 bg-light py-5 rounded">
         <div class="col-md-12 text-center">
-            <h3 class="mb-4">Technology Stack</h3>
-            <div class="d-flex flex-wrap justify-content-center gap-3">
-                <span class="badge bg-primary p-3">ASP.NET MVC 5</span>
-                <span class="badge bg-secondary p-3">Entity Framework</span>
-                <span class="badge bg-success p-3">Bootstrap 5</span>
-                <span class="badge bg-danger p-3">JavaScript</span>
-                <span class="badge bg-warning p-3">jQuery</span>
-                <span class="badge bg-info p-3">SQL Server</span>
-                <span class="badge bg-dark p-3">HTML5 & CSS3</span>
+            <h3 class="mb-5">How It Works</h3>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <div class="display-4 mb-3 text-primary">?</div>
+                <h4>Browse Books</h4>
+                <p class="mt-2">Explore our vast collection of books across various categories.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <div class="display-4 mb-3 text-success">?</div>
+                <h4>Search & Filter</h4>
+                <p class="mt-2">Find exactly what you're looking for with our powerful search tools.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center">
+                <div class="display-4 mb-3 text-warning">?</div>
+                <h4>Add & Manage</h4>
+                <p class="mt-2">Easily add new books and manage your collection.</p>
             </div>
         </div>
     </div>

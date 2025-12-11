@@ -1,122 +1,114 @@
-﻿@model WebAss2.Models.Book
+@model WebAss2.Models.Book
 
-@{
-    ViewBag.Title = "Details";
-}
+@{    ViewBag.Title = "Details";}
 
-<h2>Details</h2>
-
-<div>
-    <h4>Book</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ISBN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PublishedYear)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PublishedYear)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.InStock)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.InStock)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Rating)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CoverImage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CoverImage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PageCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PageCount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Publisher)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Publisher)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Language)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Language)
-        </dd>
-
-    </dl>
+<div class="container">
+    <h2 class="mb-4">Book Details</h2>
+    
+    <div class="row">
+        <!-- Book Cover Image -->
+        <div class="col-md-4">
+            <img src="https://picsum.photos/id/@(Model.Id + 10)/300/400" class="img-fluid rounded shadow" alt="@Model.Title cover">
+        </div>
+        
+        <!-- Book Information -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>@Model.Title</h4>
+                </div>
+                <div class="card-body">
+                    <p class="lead">by @Model.Author</p>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Category:</strong> <span class="badge bg-secondary">@Model.Category.Name</span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Published:</strong> @Model.PublishedYear
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Price:</strong> <span class="text-success fw-bold">@Model.Price</span>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Language:</strong> @Model.Language
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>ISBN:</strong> @Model.ISBN
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Publisher:</strong> @Model.Publisher
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Page Count:</strong> @Model.PageCount
+                        </div>
+                        <div class="col-md-6">
+                            <strong>In Stock:</strong> @(Model.InStock ? "<span class='text-success'>Yes</span>" : "<span class='text-danger'>No</span>")
+                        </div>
+                    </div>
+                    
+                    @if (Model.Rating.HasValue)
+                    {
+                        <div class="mb-3">
+                            <strong>Rating:</strong>
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (i <= Math.Floor(Model.Rating.Value))
+                                {
+                                    <i class="fas fa-star text-warning"></i>
+                                }
+                                else
+                                {
+                                    <i class="far fa-star text-warning"></i>
+                                }
+                            }
+                            <span class="ms-2">(@Model.Rating.Value)</span>
+                        </div>
+                    }
+                    
+                    <div class="mt-4">
+                        <h5>Description</h5>
+                        <p>@Model.Description</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group">
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-secondary" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Related Books Section -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <h3 class="mb-4">Related Books</h3>
+            <div class="row">
+                <!-- Example related books - these would be dynamically generated in a real app -->
+                @for (int i = 1; i <= 3; i++)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <img src="https://picsum.photos/id/@(Model.Id + i + 20)/300/400" class="card-img-top" alt="Related book">
+                            <div class="card-body">
+                                <h6 class="card-title">Related Book @i</h6>
+                                <p class="card-text">@Model.Category.Name</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
